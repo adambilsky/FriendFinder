@@ -2,8 +2,7 @@
 
 // ===============================================================================
 // LOAD DATA
-// We are linking our routes to a series of "data" sources.
-// These data sources hold arrays of information on friends, etc.
+// Link our routes to a series of "data" sources.
 // ===============================================================================
 var express = require("express");
 var friends = require("../data/friends");
@@ -30,10 +29,12 @@ module.exports = function (app) {
     app.post("/data/friends", function (req, res) {
 
         // Create array to hold comparison results
-        // the 'smallest' variable is a very large number to provide an unrealistic ceiling.
+        // the 'smallest' variable is an unrealistically high ceiling 
+        // for differences between answer values.
         var smallest = 10000000;
 
-        // the 'bestFriend' variable will change each time a smaller total difference is found. 
+        // the 'bestFriend' variable will change each time a smaller 
+        // total difference is found. 
         var bestFriend;
 
         //For loop through each friend in friends
@@ -49,8 +50,8 @@ module.exports = function (app) {
 
             }
             // The 'reduce' method using the arrow function reduces (sums) the array 
-            // to a single value. The Arrow function (ES6) eliminates the need to use the 'function'
-            // delcaration and 'return' statement
+            // to a single value. The Arrow function (ES6) eliminates the need to use 
+            // the 'function' delcaration and 'return' statement
 
             var matchScore = compArray.reduce((a, b) => a + b, 0);
 
@@ -59,7 +60,6 @@ module.exports = function (app) {
                 bestFriend = friends[i];
             }
         }
-
 
         // Return best match to client
         res.json(bestFriend);
